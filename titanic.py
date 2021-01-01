@@ -41,7 +41,8 @@ def make_input_fn(data_df, label_df, num_epochs=10, shuffle=True, batch_size=32)
     return ds  # return a batch of the dataset
   return input_function  # return a function object for use
 
-train_input_fn = make_input_fn(dftrain, y_train)  # here we will call the input_function that was returned to us to get a dataset object we can feed to the model
+
+ain_input_fn = make_input_fn(dftrain, y_train)  # here we will call the input_function that was returned to us to get a dataset object we can feed to the model
 eval_input_fn = make_input_fn(dfeval, y_eval, num_epochs=1, shuffle=False)
 
 # creating the model
@@ -53,3 +54,10 @@ result = linear_est.evaluate(eval_input_fn)  # get model metrics/stats by testin
 
 clear_output()  # clears consoke output
 print(result['accuracy'])  # the result variable is simply a dict of stats about our model
+
+print(result)
+
+# pred_dicts = list(linear_est.predict(eval_input_fn))
+# probs = pd.Series([pred['probabilities'][1] for pred in pred_dicts])
+
+# probs.plot(kind='hist', bins=20, title='predicted probabilities')
